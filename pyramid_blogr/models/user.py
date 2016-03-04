@@ -1,12 +1,13 @@
-import datetime #<- will be used to set default dates on models
-from pyramid_blogr.models.meta import Base  #<- we need to import our sqlalchemy metadata from which model classes will inherit
+from passlib.apps import custom_app_context as blogger_pwd_context
+from pyramid_blogr.models.meta import Base
 from sqlalchemy import (
     Column,
     Integer,
-    Unicode,     #<- will provide Unicode field
-    UnicodeText, #<- will provide Unicode text field
-    DateTime,    #<- time abstraction field
+    Unicode,
+    UnicodeText,
+    DateTime,
 )
+import datetime
 
 
 class User(Base):
@@ -17,4 +18,11 @@ class User(Base):
     last_logged = Column(DateTime, default=datetime.datetime.utcnow)
 
     def verify_password(self, password):
-        return self.password == password
+        # is it cleartext?
+        if password == self.password:
+            self.set_password(password)
+
+        return blogger_pwd_context.verify(password, self.password)
+
+    def set_password(self, password):
+        self.password = blogger_pwd_context.encrypt(password)

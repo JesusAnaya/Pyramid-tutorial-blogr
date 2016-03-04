@@ -11,3 +11,4 @@ webhelpers2==2.0
 paginate==0.5
 paginate_sqlalchemy==0.2.0
 nose
+passlib
