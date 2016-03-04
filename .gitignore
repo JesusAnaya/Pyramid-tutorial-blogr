@@ -6,3 +6,6 @@
 *.egg-info
 
 *.sqlite
+
+.cache
+__pycache__
