@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import datetime
 from pyramid_blogr.models.meta import Base
 from sqlalchemy import (
@@ -6,6 +9,7 @@ from sqlalchemy import (
     Unicode,
     UnicodeText,
     DateTime,
+    Boolean,
 )
 from webhelpers2.text import urlify
 from webhelpers2.date import distance_of_time_in_words
@@ -19,6 +23,7 @@ class BlogRecord(Base):
     body = Column(UnicodeText, default=u'')
     created = Column(DateTime, default=datetime.datetime.utcnow)
     edited = Column(DateTime, default=datetime.datetime.utcnow)
+    deleted = Column(Boolean, default=False)
 
     @property
     def slug(self):

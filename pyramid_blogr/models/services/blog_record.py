@@ -1,25 +1,30 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import sqlalchemy as sa
-from paginate_sqlalchemy import SqlalchemyOrmPage #<- provides pagination
+from paginate_sqlalchemy import SqlalchemyOrmPage
 from ..meta import DBSession
 from ..blog_record import BlogRecord
 
 
 class BlogRecordService(object):
+    query = DBSession.query(BlogRecord).filter(BlogRecord.deleted == False)
+
     @classmethod
     def all(cls):
-        return DBSession.query(BlogRecord).order_by(sa.desc(BlogRecord.created))
+        return cls.query.order_by(sa.desc(BlogRecord.created))
 
     @classmethod
     def first_posts(cls):
-        return DBSession.query(BlogRecord).order_by(sa.desc(BlogRecord.created)).limit(5)
+        return cls.query.order_by(sa.desc(BlogRecord.created)).limit(5)
 
     @classmethod
     def by_id(cls, id):
-        return DBSession.query(BlogRecord).filter(BlogRecord.id == id).first()
+        return cls.query.filter(BlogRecord.id == id).first()
 
     @classmethod
     def get_paginator(cls, request, page=1):
-        query = DBSession.query(BlogRecord).order_by(sa.desc(BlogRecord.created))
+        query = cls.query.order_by(sa.desc(BlogRecord.created))
         query_params = request.GET.mixed()
 
         def url_maker(link_page):

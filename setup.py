@@ -35,5 +35,6 @@ setup(name='pyramid_blogr',
       main = pyramid_blogr:main
       [console_scripts]
       initialize_pyramid_blogr_db = pyramid_blogr.scripts.initializedb:main
+      createsuperuser = pyramid_blogr.scripts.createsuperuser:main
       """,
       )

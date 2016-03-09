@@ -2,6 +2,12 @@
 
 {% block content %}
 
+    {% if request.authenticated_userid %}
+    <p>
+        <a href="{{ request.route_url('blog_action', action='create') }}">Add new entry</a>
+    </p>
+    {% endif %}
+
     {% if paginator.items %}
 
         {% for entry in paginator.items %}

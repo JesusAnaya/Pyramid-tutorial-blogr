@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from passlib.apps import custom_app_context as blogger_pwd_context
 from pyramid_blogr.models.meta import Base
 from sqlalchemy import (
