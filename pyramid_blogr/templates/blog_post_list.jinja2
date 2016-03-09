@@ -1,0 +1,34 @@
+{% extends "pyramid_blogr:templates/layout.jinja2" %}
+
+{% block content %}
+
+    {% if paginator.items %}
+
+        {% for entry in paginator.items %}
+            <div class="post-preview">
+                <a href="{{ request.route_url('blog', id=entry.id, slug=entry.slug) }}">
+                    <h2 class="post-title">{{ entry.title }}</h2>
+                    <h3 class="post-subtitle">{{ entry.description }}</h3>
+                </a>
+                <p class="post-meta">Posted <strong title="{{ entry.created }}"> {{ entry.created_in_words }}</strong> ago</p>
+                {% if request.authenticated_userid %}
+                    <p>
+                        <a href="{{ request.route_url('blog_action', action='edit', _query={'id':entry.id}) }}">Edit entry</a>
+                    </p>
+                {% endif %}
+            </div>
+            <hr>
+        {% endfor %}
+
+    <div class="pager">
+        {% set link_attr={"class": "btn small"} %}
+        {% set curpage_attr={"class": "btn primary small disabled"} %}
+        {% set dotdot_attr={"class": "btn small disabled"} %}
+        {{ paginator.pager(format="$link_previous ~2~ $link_next", symbol_previous="&laquo;", symbol_next="&raquo;", link_attr=link_attr, curpage_attr=curpage_attr, dotdot_attr=dotdot_attr)|safe }}
+    </div>
+
+    {% else %}
+        <p>No blog entries found.</p>
+    {% endif %}
+
+{% endblock %}

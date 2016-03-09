@@ -6,6 +6,13 @@ from ..models.services.blog_record import BlogRecordService
 from ..forms import BlogCreateForm, BlogUpdateForm
 
 
+@view_config(route_name='blog_post_list', renderer='pyramid_blogr:templates/blog_post_list.jinja2')
+def blog_post_list_view(request):
+    page = int(request.params.get('page', 1))
+    paginator = BlogRecordService.get_paginator(request, page)
+    return {'paginator': paginator}
+
+
 @view_config(route_name='blog', renderer='pyramid_blogr:templates/view_blog.jinja2')
 def blog_view(request):
     blog_id = int(request.matchdict.get('id', -1))

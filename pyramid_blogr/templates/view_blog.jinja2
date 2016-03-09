@@ -4,14 +4,14 @@
 
 <h1>{{ entry.title }}</h1>
 <hr/>
-<p>{{ entry.body }}</p>
+<p>{{ entry.body|safe }}</p>
 <hr/>
-<p>Created <strong title="{{ entry.created }}">
-    {{ entry.created_in_words }}</strong> ago</p>
+<p>Posted <strong title="{{ entry.created }}"> {{ entry.created_in_words }}</strong> ago</p>
 
+{% if request.authenticated_userid %}
 <p>
-	<a href="{{ request.route_url('home') }}">Go Back</a> ::
     <a href="{{ request.route_url('blog_action', action='edit', _query={'id':entry.id}) }}">Edit entry</a>
 </p>
+{% endif %}
 
 {% endblock %}

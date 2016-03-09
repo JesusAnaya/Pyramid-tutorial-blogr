@@ -10,6 +10,10 @@ class BlogRecordService(object):
         return DBSession.query(BlogRecord).order_by(sa.desc(BlogRecord.created))
 
     @classmethod
+    def first_posts(cls):
+        return DBSession.query(BlogRecord).order_by(sa.desc(BlogRecord.created)).limit(5)
+
+    @classmethod
     def by_id(cls, id):
         return DBSession.query(BlogRecord).filter(BlogRecord.id == id).first()
 
@@ -23,4 +27,4 @@ class BlogRecordService(object):
             query_params['page'] = link_page
             return request.current_route_url(_query=query_params)
 
-        return SqlalchemyOrmPage(query, page, items_per_page=5, url_maker=url_maker)
+        return SqlalchemyOrmPage(query, page, items_per_page=10, url_maker=url_maker)

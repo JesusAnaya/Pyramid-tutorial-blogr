@@ -1,14 +1,15 @@
-import datetime #<- will be used to set default dates on models
-from pyramid_blogr.models.meta import Base  #<- we need to import our sqlalchemy metadata from which model classes will inherit
+import datetime
+from pyramid_blogr.models.meta import Base
 from sqlalchemy import (
     Column,
     Integer,
-    Unicode,     #<- will provide Unicode field
-    UnicodeText, #<- will provide Unicode text field
-    DateTime,    #<- time abstraction field
+    Unicode,
+    UnicodeText,
+    DateTime,
 )
-from webhelpers2.text import urlify #<- will generate slugs
-from webhelpers2.date import distance_of_time_in_words #<- human friendly dates
+from webhelpers2.text import urlify
+from webhelpers2.date import distance_of_time_in_words
+from webhelpers2.html.tools import strip_tags
 
 
 class BlogRecord(Base):
@@ -26,3 +27,10 @@ class BlogRecord(Base):
     @property
     def created_in_words(self):
         return distance_of_time_in_words(self.created, datetime.datetime.utcnow())
+
+    @property
+    def description(self):
+        text = strip_tags(self.body)
+        if len(text) > 120:
+            return '{0}...'.format(text[:120])
+        return text
