@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from ..models.meta import DBSession
@@ -29,7 +32,7 @@ def blog_create(request):
     if request.method == 'POST' and form.validate():
         form.populate_obj(entry)
         DBSession.add(entry)
-        return HTTPFound(location=request.route_url('home'))
+        return HTTPFound(location=request.route_url('blog_post_list'))
     return {'form': form, 'action': request.matchdict.get('action')}
 
 

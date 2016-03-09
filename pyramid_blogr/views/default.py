@@ -1,11 +1,11 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 from pyramid.security import remember, forget
 from ..models.services.user import UserService
 from ..models.services.blog_record import BlogRecordService
-from ..forms import RegistrationForm
-from ..models.meta import DBSession
-from ..models.user import User
 
 
 @view_config(route_name='home', renderer='pyramid_blogr:templates/index.jinja2')

@@ -1,5 +1,14 @@
 {% extends "pyramid_blogr:templates/layout.jinja2" %}
 
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{ request.static_url('pyramid_blogr:static/css/blog.css')}}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+{% endblock %}
+
 {% block content %}
 <form action="{{request.route_url('blog_action',action=action)}}" method="post" class="form">
     {% if action =='edit' %}
@@ -21,7 +30,7 @@
 
     <div class="form-group">
         <label for="body">{{ form.body.label }}</label>
-        {{ form.body(class_='form-control') }}
+        {{ form.body(class_='tinymce form-control edit-post-body') }}
     </div>
     <div class="form-group">
         <label></label>
@@ -30,5 +39,5 @@
 
 
 </form>
-<p><a href="{{ request.route_url('home') }}">Go Back</a></p>
+<p><a href="{{ request.route_url('blog_post_list') }}">Go Back</a></p>
 {% endblock %}
