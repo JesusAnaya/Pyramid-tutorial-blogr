@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+from sqlalchemy.event import listen
 from pyramid_blogr.models.meta import Base
 from sqlalchemy import (
     Column,
@@ -20,14 +21,19 @@ class BlogRecord(Base):
     __tablename__ = 'entries'
     id = Column(Integer, primary_key=True)
     title = Column(Unicode(255), unique=True, nullable=False)
-    body = Column(UnicodeText, default=u'')
+    slug = Column(Unicode(255), unique=True, nullable=False)
+    body = Column(UnicodeText, default='')
+    image = Column(Unicode(255), default='')
     created = Column(DateTime, default=datetime.datetime.utcnow)
     edited = Column(DateTime, default=datetime.datetime.utcnow)
     deleted = Column(Boolean, default=False)
 
     @property
-    def slug(self):
-        return urlify(self.title)
+    def image_url(self):
+        if self.image:
+            return '/static/media/{0}'.format(self.image)
+        else:
+            return None
 
     @property
     def created_in_words(self):
@@ -39,3 +45,11 @@ class BlogRecord(Base):
         if len(text) > 120:
             return '{0}...'.format(text[:120])
         return text
+
+
+def generate_blog_post_slug(mapper, connect, target):
+         target.slug = urlify(target.title)
+
+
+listen(BlogRecord, 'before_insert', generate_blog_post_slug)
+listen(BlogRecord, 'before_update', generate_blog_post_slug)

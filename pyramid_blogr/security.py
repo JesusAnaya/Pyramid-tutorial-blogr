@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from pyramid.security import Allow, Everyone, Authenticated
 
 class BlogRecordFactory(object):

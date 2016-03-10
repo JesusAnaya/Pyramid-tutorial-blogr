@@ -23,6 +23,10 @@ class BlogRecordService(object):
         return cls.query.filter(BlogRecord.id == id).first()
 
     @classmethod
+    def by_slug(cls, slug):
+        return cls.query.filter(BlogRecord.slug == slug).first()
+
+    @classmethod
     def get_paginator(cls, request, page=1):
         query = cls.query.order_by(sa.desc(BlogRecord.created))
         query_params = request.GET.mixed()

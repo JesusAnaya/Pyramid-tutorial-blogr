@@ -6,7 +6,7 @@
 
         {% for entry in entries %}
             <div class="post-preview">
-                <a href="{{ request.route_url('blog', id=entry.id, slug=entry.slug) }}">
+                <a href="{{ request.route_url('blog', slug=entry.slug) }}">
                     <h2 class="post-title">{{ entry.title }}</h2>
                     <h3 class="post-subtitle">{{ entry.description }}</h3>
                 </a>

@@ -4,7 +4,7 @@
 
     {% if request.authenticated_userid %}
     <p>
-        <a href="{{ request.route_url('blog_action', action='create') }}">Add new entry</a>
+        <a href="{{ request.route_url('blog_create') }}">Add new entry</a>
     </p>
     {% endif %}
 
@@ -12,14 +12,14 @@
 
         {% for entry in paginator.items %}
             <div class="post-preview">
-                <a href="{{ request.route_url('blog', id=entry.id, slug=entry.slug) }}">
+                <a href="{{ request.route_url('blog', slug=entry.slug) }}">
                     <h2 class="post-title">{{ entry.title }}</h2>
                     <h3 class="post-subtitle">{{ entry.description }}</h3>
                 </a>
                 <p class="post-meta">Posted <strong title="{{ entry.created }}"> {{ entry.created_in_words }}</strong> ago</p>
                 {% if request.authenticated_userid %}
                     <p>
-                        <a href="{{ request.route_url('blog_action', action='edit', _query={'id':entry.id}) }}">Edit entry</a>
+                        <a href="{{ request.route_url('blog_edit', id=entry.id) }}">Edit entry</a>
                     </p>
                 {% endif %}
             </div>

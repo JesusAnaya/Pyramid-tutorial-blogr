@@ -4,13 +4,20 @@
 
 <h1>{{ entry.title }}</h1>
 <hr/>
+
+{% if entry.image_url %}
+<p class="col-md-12">
+	<img src="{{ entry.image_url }}" class='col-md-12'>
+</p>
+{% endif %}
+
 <p>{{ entry.body|safe }}</p>
 <hr/>
 <p>Posted <strong title="{{ entry.created }}"> {{ entry.created_in_words }}</strong> ago</p>
 
 {% if request.authenticated_userid %}
 <p>
-    <a href="{{ request.route_url('blog_action', action='edit', _query={'id':entry.id}) }}">Edit entry</a>
+    <a href="{{ request.route_url('blog_edit', id=entry.id) }}">Edit entry</a>
 </p>
 {% endif %}
 

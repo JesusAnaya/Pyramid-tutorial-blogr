@@ -1,8 +1,18 @@
 {% extends "pyramid_blogr:templates/layout.jinja2" %}
 
+{% block extra_css %}
+<link href="{{ request.static_url('pyramid_blogr:static/css/blog.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea' });</script>
+{% endblock %}
+
 {% block content %}
-<form action="{{request.route_url('blog_action',action=action)}}" method="post" class="form">
-    {% if action =='edit' %}
+<form action="" method="post" class="form" enctype="multipart/form-data">
+
+    {% if form.id %}
         {{ form.id() }}
     {% endif %}
 
@@ -15,14 +25,24 @@
         {{ form.title(class_='form-control') }}
     </div>
 
+    {% for error in form.image.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="image">{{ form.image.label }}</label>
+        {{ form.image(class_='form-control') }}
+    </div>
+
     {% for error in form.body.errors %}
         <div class="error">{{ error }}</div>
     {% endfor %}
 
     <div class="form-group">
         <label for="body">{{ form.body.label }}</label>
-        {{ form.body(class_='form-control') }}
+        {{ form.body(class_='form-control body-field') }}
     </div>
+
     <div class="form-group">
         <label></label>
         <button type="submit" class="btn btn-default">Submit</button>
