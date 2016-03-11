@@ -393,3 +393,19 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
+
+.site-heading > ul.profile-items > li > h1.main-title {
+  font-size: 60px;
+}
+
+.site-heading > ul.profile-items > li > img.profile-image {
+  width: 180px;
+  border-radius: 50%;
+  border: 5px solid white;
+  margin-right: 25px;
+}
+
+ul.profile-items > li {
+  list-style: none;
+  display: inline-block;
+}

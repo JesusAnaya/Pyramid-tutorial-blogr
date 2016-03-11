@@ -3,3 +3,7 @@
 textarea.body-field {
 	height: 300px;
 }
+
+div.site-heading > h1.post-title {
+    font-size: 45px;
+}

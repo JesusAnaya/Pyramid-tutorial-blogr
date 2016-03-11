@@ -1,9 +1,16 @@
 {% extends "pyramid_blogr:templates/layout.jinja2" %}
 
-{% block content %}
+{% block title %} {{ entry.title }} {% endblock %}
 
-<h1>{{ entry.title }}</h1>
-<hr/>
+{% block page_title %}
+<h1 class="post-title">{{ entry.title }}</h1>
+{% endblock %}
+
+{% block extra_css %}
+<link href="{{ request.static_url('pyramid_blogr:static/css/blog.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
 
 {% if entry.image_url %}
 <p class="col-md-12">

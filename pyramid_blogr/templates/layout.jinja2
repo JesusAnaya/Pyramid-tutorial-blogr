@@ -9,13 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Jesus Anaya Blog</title>
+    <title>{% block title %} Jesus Anaya Blog {% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ request.static_url('pyramid_blogr:static/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{ request.static_url('pyramid_blogr:static/css/clean-blog.min.css') }}" rel="stylesheet">
+    <link href="{{ request.static_url('pyramid_blogr:static/css/clean-blog.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -78,10 +78,19 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Jesus Anaya Dev</h1>
+                    {% block page_title %}
+                        <ul class="profile-items">
+                            <li>
+                                <img src="{{ request.static_url('pyramid_blogr:static/img/me.jpg') }}" class="profile-image">
+                            </li>
+                            <li>
+                                <h1 class="main-title">Jesus Anaya</h1>
+                            </li>
+                        </ul>
                         <hr class="small">
                         <span class="subheading">My personal website and blog</span>
                     </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>
