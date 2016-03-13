@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import datetime
 from sqlalchemy.event import listen
 from pyramid_blogr.models.meta import Base
+
 from sqlalchemy import (
     Column,
     Integer,
@@ -29,6 +30,10 @@ class BlogRecord(Base):
     deleted = Column(Boolean, default=False)
 
     @property
+    def url(self):
+        return '/blog/{0}'.format(self.slug)
+
+    @property
     def image_url(self):
         if self.image:
             return '/static/media/{0}'.format(self.image)
@@ -48,7 +53,7 @@ class BlogRecord(Base):
 
 
 def generate_blog_post_slug(mapper, connect, target):
-         target.slug = urlify(target.title)
+    target.slug = urlify(target.title)
 
 
 listen(BlogRecord, 'before_insert', generate_blog_post_slug)

@@ -1,6 +1,7 @@
 {% extends "pyramid_blogr:templates/layout.jinja2" %}
 
 {% block title %} {{ entry.title }} {% endblock %}
+{% block description %} {{ entry.description }} {% endblock %}
 
 {% block page_title %}
 <h1 class="post-title">{{ entry.title }}</h1>
@@ -18,6 +19,34 @@
 </p>
 {% endif %}
 
+{% set public_url = request.public_domain + '/blog/' %}
+
+<div id="share-buttons">
+    <!-- Facebook -->
+    <a href="http://www.facebook.com/sharer.php?u=//{{ request.public_domain }}{{ entry.url }}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+    </a>
+
+    <!-- Twitter -->
+    <a href="https://twitter.com/share?url=//{{ request.public_domain }}{{ entry.url }}&amp;text={{ entry.title }}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+    </a>
+
+    <!-- Google+ -->
+    <a href="https://plus.google.com/share?url=//{{ request.public_domain }}{{ entry.url }}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=//{{ request.public_domain }}{{ entry.url }}" target="_blank">
+        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+    </a>
+
+    <!-- Email -->
+    <a href="mailto:?Subject=Reply from {{ entry.title }}&amp;Body=//{{ request.public_domain }}{{ entry.url }}">
+        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+    </a>
+</div>
 <p>{{ entry.body|safe }}</p>
 <hr/>
 <p>Posted <strong title="{{ entry.created }}"> {{ entry.created_in_words }}</strong> ago</p>

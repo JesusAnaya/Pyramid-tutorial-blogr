@@ -26,6 +26,8 @@ def main(global_config, **settings):
     authorization_policy = ACLAuthorizationPolicy()
     config = Configurator(settings=settings, authentication_policy=authentication_policy, authorization_policy=authorization_policy)
 
+    config.add_tween('pyramid_blogr.tweens.TweenStartRequestAttributes')
+
     # Apps includes
     config.include('pyramid_jinja2')
     config.include('pyramid_tm')
