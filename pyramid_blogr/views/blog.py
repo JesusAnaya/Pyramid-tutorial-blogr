@@ -35,7 +35,7 @@ def blog_create(request):
             form.image.data = request.storage.save(request.POST[form.image.name], folder='blog')
         form.populate_obj(entry)
         DBSession.add(entry)
-        return HTTPFound(location=request.route_url('blog', slug=urlify(entry.title)))
+        return HTTPFound(location=entry.url)
     return {'form': form}
 
 
@@ -54,5 +54,5 @@ def blog_edit(request):
         else:
             form.image.data = entry.image
         form.populate_obj(entry)
-        return HTTPFound(location=request.route_url('blog', slug=urlify(entry.title)))
+        return HTTPFound(location=entry.url)
     return {'form': form}

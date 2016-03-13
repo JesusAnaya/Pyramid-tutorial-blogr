@@ -31,7 +31,7 @@ class BlogRecord(Base):
 
     @property
     def url(self):
-        return '/blog/{0}'.format(self.slug)
+        return '/blog/{0}'.format(self.slug or urlify(self.title))
 
     @property
     def image_url(self):
@@ -53,7 +53,8 @@ class BlogRecord(Base):
 
 
 def generate_blog_post_slug(mapper, connect, target):
-    target.slug = urlify(target.title)
+    if not target.slug:
+        target.slug = urlify(target.title)
 
 
 listen(BlogRecord, 'before_insert', generate_blog_post_slug)

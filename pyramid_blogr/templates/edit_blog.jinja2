@@ -43,6 +43,15 @@
         {{ form.body(class_='form-control body-field') }}
     </div>
 
+    {% for error in form.slug.errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+
+    <div class="form-group">
+        <label for="slug">{{ form.slug.label }}</label>
+        {{ form.slug(class_='form-control') }}
+    </div>
+
     <div class="form-group">
         <label></label>
         <button type="submit" class="btn btn-default">Submit</button>

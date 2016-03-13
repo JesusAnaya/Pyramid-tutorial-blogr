@@ -5,12 +5,14 @@ from wtforms import Form, StringField, TextAreaField, validators, FileField
 from wtforms import HiddenField, PasswordField
 from .utils import VALID_IMAGE_ETX
 
+
 def strip_filter(x):
     return x.strip() if x else None
 
 
 class BlogCreateForm(Form):
     title = StringField('Title', [validators.Length(min=1, max=255)], filters=[strip_filter])
+    slug = StringField('Slug', [validators.Length(min=1, max=255)], filters=[strip_filter])
     body = TextAreaField('Contents', [validators.Length(min=1)], filters=[strip_filter])
     image = FileField('Image File')
 
