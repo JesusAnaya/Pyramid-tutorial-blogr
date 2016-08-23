@@ -31,51 +31,7 @@
 {% block content %}
 <form action="" method="post" class="form" enctype="multipart/form-data">
 
-    {% if form.id %}
-        {{ form.id() }}
-    {% endif %}
-
-    {% for error in form.title.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
-
-    <div class="form-group">
-        <label for="title">{{ form.title.label }}</label>
-        {{ form.title(class_='form-control') }}
-    </div>
-
-    {% for error in form.image.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
-
-    <div class="form-group">
-        <label for="image">{{ form.image.label }}</label>
-        {{ form.image(class_='form-control') }}
-    </div>
-
-    {% for error in form.body.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
-
-    <div class="form-group">
-        <label for="body">{{ form.body.label }}</label>
-        {{ form.body(class_='form-control body-field') }}
-    </div>
-
-    {% for error in form.slug.errors %}
-        <div class="error">{{ error }}</div>
-    {% endfor %}
-
-    <div class="form-group">
-        <label for="slug">{{ form.slug.label }}</label>
-        {{ form.slug(class_='form-control') }}
-    </div>
-
-    <div class="form-group">
-        <label></label>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-
+    {{ form|safe }}
 
 </form>
 <p><a href="{{ request.route_url('home') }}">Go Back</a></p>

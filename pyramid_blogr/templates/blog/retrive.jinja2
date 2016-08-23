@@ -53,7 +53,7 @@
 
 {% if request.authenticated_userid %}
 <p>
-    <a href="{{ request.route_url('blog_edit', id=entry.id) }}">Edit entry</a>
+    <a href="{{ request.route_url('blog.edit', id=entry.id) }}">Edit entry</a>
 </p>
 {% endif %}
 

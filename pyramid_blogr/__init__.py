@@ -33,6 +33,7 @@ def main(global_config, **settings):
     config.include('pyramid_tm')
     config.include('pyramid_storage')
     config.include('pyramid_blogr.urls')
+    config.include('pyramid_blogr.storage')
 
     config.scan()
     return config.make_wsgi_app()

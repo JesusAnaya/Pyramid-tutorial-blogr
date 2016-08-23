@@ -16,3 +16,7 @@ div.site-heading > h1.post-title {
     display: inline;
     cursor: pointer;
 }
+
+#share-buttons a {
+    text-align: none;
+}

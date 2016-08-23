@@ -1,0 +1,3 @@
+
+class LocalFilesStorageException(Exception):
+    pass
